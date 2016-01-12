@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BERef", "BERef\BERef.csproj", "{3FD4E4B9-8161-45CC-B461-F1B79BE8D4A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibCrawler", "BibCrawler\BibCrawler.csproj", "{5B1BE485-CA99-493D-A8CB-B44A3976527D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BibCrawler", "BibCrawler", "{A7A3DE65-A10A-4F35-9C69-4963BB60839D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibCrawlerUnitTest", "BibCrawlerUnitTest\BibCrawlerUnitTest.csproj", "{D6E75C41-BAA9-4D09-9894-347DA6217521}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +21,20 @@ Global
 		{3FD4E4B9-8161-45CC-B461-F1B79BE8D4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD4E4B9-8161-45CC-B461-F1B79BE8D4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD4E4B9-8161-45CC-B461-F1B79BE8D4A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B1BE485-CA99-493D-A8CB-B44A3976527D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B1BE485-CA99-493D-A8CB-B44A3976527D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B1BE485-CA99-493D-A8CB-B44A3976527D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B1BE485-CA99-493D-A8CB-B44A3976527D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6E75C41-BAA9-4D09-9894-347DA6217521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6E75C41-BAA9-4D09-9894-347DA6217521}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6E75C41-BAA9-4D09-9894-347DA6217521}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6E75C41-BAA9-4D09-9894-347DA6217521}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5B1BE485-CA99-493D-A8CB-B44A3976527D} = {A7A3DE65-A10A-4F35-9C69-4963BB60839D}
+		{D6E75C41-BAA9-4D09-9894-347DA6217521} = {A7A3DE65-A10A-4F35-9C69-4963BB60839D}
 	EndGlobalSection
 EndGlobal
