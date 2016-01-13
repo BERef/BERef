@@ -8,20 +8,17 @@ namespace BibCrawler
 {
     public class BriefEntry
     {
-        #region
+        #region Private Field
         private string _title;
         private string _abstract;
         private string _profile;
         private string _citeUrl;
         #endregion
 
-        #region
+        #region Public Property
         public string Title
         {
-            get
-            {
-                return _title;
-            }
+            get { return _title; }
             set
             {
                 if (value != null)
@@ -34,10 +31,7 @@ namespace BibCrawler
         }
         public string Abstract
         {
-            get
-            {
-                return _abstract;
-            }
+            get { return _abstract; }
             set
             {
                 _abstract = value == null ? string.Empty : value;
@@ -45,10 +39,7 @@ namespace BibCrawler
         }
         public string Profile
         {
-            get
-            {
-                return _profile;
-            }
+            get { return _profile; }
             set
             {
                 _profile = value == null ? string.Empty : value;
@@ -56,10 +47,7 @@ namespace BibCrawler
         }
         public string CiteUrl
         {
-            get
-            {
-                return _citeUrl;
-            }
+            get { return _citeUrl; }
             set
             {
                 if (value != null)
