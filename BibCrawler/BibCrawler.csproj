@@ -44,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaiduCrawler.cs" />
+    <Compile Include="BaiduSearchProvider.cs" />
     <Compile Include="BriefEntry.cs" />
-    <Compile Include="GoogleCrawler.cs" />
-    <Compile Include="ICrawler.cs" />
+    <Compile Include="GoogleSearchProvider.cs" />
+    <Compile Include="RefSearchProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
