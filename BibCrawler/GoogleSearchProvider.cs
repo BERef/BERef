@@ -9,7 +9,7 @@ using System.IO;
 
 namespace BibCrawler
 {
-    public class GoogleCrawler : RefSearchProvider
+    public class GoogleSearchProvider : RefSearchProvider
     {
         #region Const Field
         private static readonly string _googleScholarURL       = "https://scholar.google.com";
@@ -31,7 +31,7 @@ namespace BibCrawler
         #endregion
 
         #region Constructor
-        public GoogleCrawler(string keyword)
+        public GoogleSearchProvider(string keyword)
         {
             Search(keyword);
         }
@@ -56,7 +56,7 @@ namespace BibCrawler
             var webResponse = webRequest.GetResponse();
 
             string bibtex = null;
-            using (StreamReader reader = new StreamReader(webResponse.GetResponseStream(), Encoding.Default))
+            using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding.Default))
             {
                 bibtex = reader.ReadToEnd();
             }
