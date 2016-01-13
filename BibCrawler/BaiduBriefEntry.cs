@@ -8,11 +8,36 @@ using System.Threading.Tasks;
 
 namespace BibCrawler
 {
-    class BaiduBriefEntry : BriefEntry
+    public sealed class BaiduBriefEntry : BriefEntry
     {
-        public override string GetBibTex()
+
+        #region Private Field
+        private string _citeUrl;
+        #endregion
+
+        #region Public Field
+        public string CiteUrl
         {
-            var webRequest = WebRequest.Create(CiteUrl);
+            set
+            {
+                if (value != null)
+                    _citeUrl = value;
+                else
+                {
+                    throw new NullReferenceException("CiteUrl is required.");
+                }
+            }
+        }
+        #endregion
+
+        #region Implement Abstract Method
+        /// <summary>
+        /// Get BibTeX from Baidu Scholar.
+        /// </summary>
+        /// <returns></returns>
+        protected override string GetBibTeX()
+        {
+            var webRequest = WebRequest.Create(_citeUrl);
             var webResponse = webRequest.GetResponse();
 
             string bibtex = null;
@@ -22,5 +47,6 @@ namespace BibCrawler
             }
             return bibtex;
         }
+        #endregion
     }
 }
