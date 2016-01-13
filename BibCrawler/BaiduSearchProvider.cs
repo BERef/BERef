@@ -13,7 +13,7 @@ namespace BibCrawler
     {
         #region Const Field
         private static readonly string _baiduScholarURL = "http://xueshu.baidu.com/s?wd=";
-        private static readonly string _baiduCiteURL     = "http://xueshu.baidu.com/u/citation?url=";
+        private static readonly string _baiduCiteURL    = "http://xueshu.baidu.com/u/citation?url=";
 
         private static readonly string _entryPath    = "//div[@tpl='se_st_sc_default']";
         private static readonly string _citePath     = ".//a[@data-click=\"{\'button_tp\':\'cite\'}\"]";
@@ -46,19 +46,6 @@ namespace BibCrawler
         public override IList<BriefEntry> GetResult()
         {
             return _briefEntryList;
-        }
-
-        public string GetBibTex(BriefEntry briefEntry)
-        {
-            var webRequest = WebRequest.Create(briefEntry.CiteUrl);
-            var webResponse = webRequest.GetResponse();
-
-            string bibtex = null;
-            using (var reader = new StreamReader(webResponse.GetResponseStream()))
-            {
-                bibtex = reader.ReadToEnd();
-            }
-            return bibtex;
         }
         #endregion
 
@@ -97,14 +84,14 @@ namespace BibCrawler
                 }
                 else authorList.Append(_none);
                 var publish = node.SelectSingleNode(_publishPath)?.InnerText ?? _none;
-                var year    = node.SelectSingleNode(_yearPath)?.InnerText    ?? _none;
+                var year = node.SelectSingleNode(_yearPath)?.InnerText ?? _none;
 
                 // Build entry
-                var briefEntry = new BriefEntry();
-                briefEntry.CiteUrl    = $"{_baiduCiteURL}{WebUtility.UrlEncode(citeLink)}&sign={citeSign}&t=bib";
-                briefEntry.Profile    = $"{authorList.ToString()} - {publish} - {year}";
-                briefEntry.Title      = node.SelectSingleNode(_titlePath)?.InnerText;
-                briefEntry.Abstract   = node.SelectSingleNode(_abstractPath)?.InnerText;
+                var briefEntry      = new BaiduBriefEntry();
+                briefEntry.CiteUrl  = $"{_baiduCiteURL}{WebUtility.UrlEncode(citeLink)}&sign={citeSign}&t=bib";
+                briefEntry.Profile  = $"{authorList.ToString()} - {publish} - {year}";
+                briefEntry.Title    = node.SelectSingleNode(_titlePath)?.InnerText;
+                briefEntry.Abstract = node.SelectSingleNode(_abstractPath)?.InnerText;
                 _briefEntryList.Add(briefEntry);
             }
         }

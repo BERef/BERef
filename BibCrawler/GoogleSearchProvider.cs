@@ -46,22 +46,6 @@ namespace BibCrawler
         {
             return _briefEntryList;
         }
-
-        public string GetBibTex(BriefEntry briefEntry)
-        {
-            var citeWeb = new HtmlWeb();
-            var citeUrl = _googleScholarURL + WebUtility.HtmlDecode(citeWeb.Load(briefEntry.CiteUrl).DocumentNode.SelectSingleNode("//a[@class='gs_citi']")?.Attributes["href"].Value);
-
-            var webRequest = WebRequest.Create(citeUrl);
-            var webResponse = webRequest.GetResponse();
-
-            string bibtex = null;
-            using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding.Default))
-            {
-                bibtex = reader.ReadToEnd();
-            }
-            return bibtex;
-        }
         #endregion
 
         #region Private Method
@@ -94,11 +78,11 @@ namespace BibCrawler
                 var citeId = cite.Attributes[_citeIdAttrName].Value.Split(',')[1];
 
                 // Build entry
-                var briefEntry = new BriefEntry();
-                briefEntry.Title = titleBuilder.ToString();
-                briefEntry.Profile = node.SelectSingleNode(_profilePath)?.InnerText;
+                var briefEntry      = new GoogleBriefEntry();
+                briefEntry.Title    = titleBuilder.ToString();
+                briefEntry.Profile  = node.SelectSingleNode(_profilePath)?.InnerText;
                 briefEntry.Abstract = node.SelectSingleNode(_abstractPath)?.InnerText;
-                briefEntry.CiteUrl = $"{_googleCiteURL}{citeId.Substring(1, citeId.Length - 2)}{_googleCiteURLSuffix}";
+                briefEntry.CiteUrl  = $"{_googleCiteURL}{citeId.Substring(1, citeId.Length - 2)}{_googleCiteURLSuffix}";
                 _briefEntryList.Add(briefEntry);
             }
         }
