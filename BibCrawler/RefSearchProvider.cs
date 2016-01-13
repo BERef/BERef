@@ -6,25 +6,32 @@ using System.Threading.Tasks;
 
 namespace BibCrawler
 {
-    public interface ICrawler
+    public abstract class RefSearchProvider
     {
+        #region Const Field
         /// <summary>
-        /// Search by keyword.
+        /// Split symbol.
         /// </summary>
-        /// <param name="keyword"></param>
-        void Search(string keyword);
+        protected static string _separator = ", ";
+        /// <summary>
+        /// Empty field.
+        /// </summary>
+        protected static string _none = "None";
+        #endregion
 
+        #region Abstract Method
         /// <summary>
         /// Get search result list.
         /// </summary>
         /// <returns></returns>
-        IList<BriefEntry> GetList();
+        public abstract IList<BriefEntry> GetResult();
 
         /// <summary>
         /// Get BibTex by search result item.
         /// </summary>
         /// <param name="briefEntry"></param>
         /// <returns></returns>
-        string GetBibTex(BriefEntry briefEntry);
+        //string GetBibTex(BriefEntry briefEntry);
+        #endregion
     }
 }
