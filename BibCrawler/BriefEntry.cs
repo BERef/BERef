@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BibCrawler
 {
-    public class BriefEntry
+    public abstract class BriefEntry
     {
         #region Private Field
         private string _title;
@@ -58,6 +58,10 @@ namespace BibCrawler
                 }
             }
         }
+        #endregion
+
+        #region
+        public abstract string GetBibTex();
         #endregion
     }
 }
