@@ -55,6 +55,8 @@
     <Compile Include="BaiduSearchProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GoogleSearchProviderTest.cs" />
+    <Compile Include="BaiduBriefEntryTest.cs" />
+    <Compile Include="GoogleBriefEntryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BibCrawler\BibCrawler.csproj">
