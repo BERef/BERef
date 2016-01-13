@@ -12,7 +12,7 @@ namespace BibCrawler
         private string _title;
         private string _abstract;
         private string _profile;
-        private string _citeUrl;
+        private string _bibTeX;
         #endregion
 
         #region Public Property
@@ -34,7 +34,7 @@ namespace BibCrawler
             get { return _abstract; }
             set
             {
-                _abstract = value == null ? string.Empty : value;
+                _abstract = value ?? string.Empty;
             }
         }
         public string Profile
@@ -42,26 +42,32 @@ namespace BibCrawler
             get { return _profile; }
             set
             {
-                _profile = value == null ? string.Empty : value;
+                _profile = value ?? string.Empty;
             }
         }
-        public string CiteUrl
+
+        /// <summary>
+        /// It will excute abstract method GetBibTeX(), 
+        /// and might take uncertain time when invoked this getter in the first time.
+        /// </summary>
+        public string BibTeX
         {
-            get { return _citeUrl; }
-            set
+            get
             {
-                if (value != null)
-                    _citeUrl = value;
-                else
-                {
-                    throw new NullReferenceException("CiteUrl is required.");
-                }
+                _bibTeX = _bibTeX ?? GetBibTeX();
+                return _bibTeX;
             }
+            
         }
+
         #endregion
 
-        #region
-        public abstract string GetBibTex();
+        #region Public Abstract Method
+        /// <summary>
+        /// Get BibTeX from customed data source.
+        /// </summary>
+        /// <returns></returns>
+        protected abstract string GetBibTeX();
         #endregion
     }
 }
