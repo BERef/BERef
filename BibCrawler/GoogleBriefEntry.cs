@@ -37,6 +37,7 @@ namespace BibCrawler
         /// Get BibTeX from Google Scholar.
         /// </summary>
         /// <returns></returns>
+        // TODO: Test this method.
         protected override string GetBibTeX()
         {
             var citeWeb = new HtmlWeb();
