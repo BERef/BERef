@@ -9,83 +9,108 @@ using System.IO;
 
 namespace BibCrawler
 {
-    public class GoogleSearchProvider : RefSearchProvider
+    public class GoogleSearchProvider : RefSearchProvider<HtmlNode>
     {
         #region Const Field
-        private static readonly string _googleScholarURL       = "https://scholar.google.com";
+        private static readonly string _googleScholarURL = "https://scholar.google.com";
         private static readonly string _googleScholarSearchURL = "https://scholar.google.com/scholar?q=";
-        private static readonly string _googleCiteURL          = "https://scholar.google.com/scholar.bib?q=info:";
-        private static readonly string _googleCiteURLSuffix    = ":scholar.google.com/&output=cite&scirp=0&hl=zh-CN";
+        private static readonly string _googleCiteURL = "https://scholar.google.com/scholar.bib?q=info:";
+        private static readonly string _googleCiteURLSuffix = ":scholar.google.com/&output=cite&scirp=0&hl=zh-CN";
 
-        private static readonly string _entryPath    = "//div[@class='gs_ri']";
-        private static readonly string _citePath     = ".//a[@onclick]";
-        private static readonly string _titlePath    = ".//h3[@class='gs_rt']";
-        private static readonly string _profilePath  = ".//div[@class='gs_a']";
+        private static readonly string _entryPath = "//div[@class='gs_ri']";
+        private static readonly string _citePath = ".//a[@onclick]";
+        private static readonly string _titlePath = ".//h3[@class='gs_rt']";
+        private static readonly string _profilePath = ".//div[@class='gs_a']";
         private static readonly string _abstractPath = ".//div[@class='gs_rs']";
 
         private static readonly string _citeIdAttrName = "onclick";
         #endregion
 
         #region Private Field
-        private List<BriefEntry> _briefEntryList = new List<BriefEntry>();
+        private HtmlWeb _htmlWeb = new HtmlWeb();
+        private HtmlDocument _htmlDoc;
         #endregion
 
         #region Constructor
-        public GoogleSearchProvider(string keyword)
+        public GoogleSearchProvider()
         {
-            Search(keyword);
-        }
-        #endregion
-
-        #region Public Method
-        /// <summary>
-        /// Get a ref entry list from Google schoolar search engine.
-        /// </summary>
-        /// <returns></returns>
-        public override IList<BriefEntry> GetResult()
-        {
-            return _briefEntryList;
         }
         #endregion
 
         #region Private Method
-        private void Search(string keyword)
+        private void GetSearchPage(string keyword)
         {
-            var htmlweb = new HtmlWeb();
-            var htmldoc = htmlweb.Load($"{_googleScholarSearchURL}{keyword}");
+            _htmlDoc =  _htmlWeb.Load($"{_googleScholarSearchURL}{keyword}");
+        }
 
-            // Get all nodes
-            var nodes = htmldoc.DocumentNode.SelectNodes(_entryPath);
+        private string ParseCiteUrl(HtmlNode node)
+        {
+            // Get cite html in current node.
+            var cite = node.SelectSingleNode(_citePath);
+
+            // If there is no cite in current node, continue.
+            if (cite == null)
+                return null;
+
+            // Get cite url's parameter.
+            var citeId = cite.Attributes[_citeIdAttrName].Value.Split(',')[1];
+            return $"{_googleCiteURL}{citeId.Substring(1, citeId.Length - 2)}{_googleCiteURLSuffix}";
+        }
+
+        #endregion
+
+        #region Public Override Method
+        /// <summary>
+        /// Get a ref entry list from Google schoolar search engine.
+        /// </summary>
+        /// <returns></returns>
+        public override IList<BriefEntry> GetResult(string keyword)
+        {
+            GetSearchPage(keyword);
+            return Parse();
+        }
+        #endregion
+
+        #region Protected Override Method
+        protected override IEnumerable<Tuple<HtmlNode, BriefEntry>> ParsePairs()
+        {
+            var nodes = _htmlDoc.DocumentNode.SelectNodes(_entryPath);
 
             foreach (var node in nodes)
             {
-                // Get cite html in current node.
-                var cite = node.SelectSingleNode(_citePath);
-
-                // If there is no cite in current node, continue.
-                if (cite == null) continue;
-
-                // Get title.
-                var title = node.SelectSingleNode(_titlePath);
-                var titleBuilder = new StringBuilder();
-                foreach (var t in title.ChildNodes)
-                {
-                    if (t.Name != "span")
-                        titleBuilder.Append(t.InnerText);
-                }
-
-                // Get cite url's parameter.
-                var citeId = cite.Attributes[_citeIdAttrName].Value.Split(',')[1];
+                var citeUrl = ParseCiteUrl(node);
+                if (citeUrl == null)
+                    continue;
 
                 // Build entry
-                var briefEntry      = new GoogleBriefEntry();
-                briefEntry.Title    = titleBuilder.ToString();
-                briefEntry.Profile  = node.SelectSingleNode(_profilePath)?.InnerText;
-                briefEntry.Abstract = node.SelectSingleNode(_abstractPath)?.InnerText;
-                briefEntry.CiteUrl  = $"{_googleCiteURL}{citeId.Substring(1, citeId.Length - 2)}{_googleCiteURLSuffix}";
-                _briefEntryList.Add(briefEntry);
+                var entry = new BaiduBriefEntry();
+                entry.CiteUrl = citeUrl;
+                yield return new Tuple<HtmlNode, BriefEntry>(node, entry);
             }
+        }
+
+        protected override string ParseTitle(HtmlNode item)
+        {
+            var title = item.SelectSingleNode(_titlePath);
+            var titleBuilder = new StringBuilder();
+            foreach (var t in title.ChildNodes)
+            {
+                if (t.Name != "span")
+                    titleBuilder.Append(t.InnerText);
+            }
+            return titleBuilder.ToString();
+        }
+
+        protected override string ParseProfile(HtmlNode item)
+        {
+            return item.SelectSingleNode(_profilePath)?.InnerText;
+        }
+
+        protected override string ParseAbstract(HtmlNode item)
+        {
+            return item.SelectSingleNode(_abstractPath)?.InnerText;
         }
         #endregion
     }
 }
+

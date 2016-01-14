@@ -9,18 +9,18 @@ using HtmlAgilityPack;
 
 namespace BibCrawler
 {
-    public sealed class BaiduSearchProvider : RefSearchProvider
+    public sealed class BaiduSearchProvider : RefSearchProvider<HtmlNode>
     {
         #region Const Field
         private static readonly string _baiduScholarURL = "http://xueshu.baidu.com/s?wd=";
-        private static readonly string _baiduCiteURL    = "http://xueshu.baidu.com/u/citation?url=";
+        private static readonly string _baiduCiteURL = "http://xueshu.baidu.com/u/citation?url=";
 
-        private static readonly string _entryPath    = "//div[@tpl='se_st_sc_default']";
-        private static readonly string _citePath     = ".//a[@data-click=\"{\'button_tp\':\'cite\'}\"]";
-        private static readonly string _titlePath    = ".//a[@data-click=\"{\'button_tp\':\'title\'}\"]";
-        private static readonly string _authorsPath  = ".//a[@data-click=\"{\'button_tp\':\'author\'}\"]";
-        private static readonly string _publishPath  = ".//a[@data-click=\"{\'button_tp\':\'publish\'}\"]";
-        private static readonly string _yearPath     = ".//span[@data-year]";
+        private static readonly string _entryPath = "//div[@tpl='se_st_sc_default']";
+        private static readonly string _citePath = ".//a[@data-click=\"{\'button_tp\':\'cite\'}\"]";
+        private static readonly string _titlePath = ".//a[@data-click=\"{\'button_tp\':\'title\'}\"]";
+        private static readonly string _authorsPath = ".//a[@data-click=\"{\'button_tp\':\'author\'}\"]";
+        private static readonly string _publishPath = ".//a[@data-click=\"{\'button_tp\':\'publish\'}\"]";
+        private static readonly string _yearPath = ".//span[@data-year]";
         private static readonly string _abstractPath = ".//div[@class='c_abstract']";
 
         private static readonly string _citeLinkAttrName = "data-link";
@@ -28,72 +28,98 @@ namespace BibCrawler
         #endregion
 
         #region Private Field
-        private List<BriefEntry> _briefEntryList = new List<BriefEntry>();
+        private HtmlWeb _htmlWeb = new HtmlWeb();
+        private HtmlDocument _htmlDoc;
         #endregion
 
         #region Constructor
-        public BaiduSearchProvider(string keyword)
+        public BaiduSearchProvider()
         {
-            Search(keyword);
-        }
-        #endregion
-
-        #region Public Method
-        /// <summary>
-        /// Get a ref entry list from Baidu schoolar search engine.
-        /// </summary>
-        /// <returns></returns>
-        public override IList<BriefEntry> GetResult()
-        {
-            return _briefEntryList;
         }
         #endregion
 
         #region Private Method
-        private void Search(string keyword)
+        private void GetSearchPage(string keyword)
         {
-            var htmlWeb = new HtmlWeb();
-            var htmlDoc = htmlWeb.Load($"{_baiduScholarURL}{keyword}");
+            _htmlDoc = _htmlWeb.Load($"{_baiduScholarURL}{keyword}");
+        }
 
-            // Get all result nodes
-            var nodes = htmlDoc.DocumentNode.SelectNodes(_entryPath);
+        private string ParseCiteUrl(HtmlNode item)
+        {
+            // Get cite html in current node.
+            var cite = item.SelectSingleNode(_citePath);
+
+            // If there is no cite in current node, continue.
+            if (cite == null)
+                return null;
+
+            // Get cite url's parameter.
+            var citeLink = cite.Attributes[_citeLinkAttrName].Value;
+            var citeSign = cite.Attributes[_citeSignAttrName].Value;
+            return $"{_baiduCiteURL}{WebUtility.UrlEncode(citeLink)}&sign={citeSign}&t=bib";
+        }
+        #endregion
+
+        #region Public Override Method
+        /// <summary>
+        /// Get a ref entry list from Baidu schoolar search engine.
+        /// </summary>
+        /// <returns></returns>
+        public override IList<BriefEntry> GetResult(string keyword)
+        {
+            GetSearchPage(keyword);
+            return Parse();
+        }
+        #endregion
+
+        #region Protected Override Method
+
+        protected override IEnumerable<Tuple<HtmlNode, BriefEntry>> ParsePairs()
+        {
+            var nodes = _htmlDoc.DocumentNode.SelectNodes(_entryPath);
 
             foreach (var node in nodes)
             {
-                // Get cite html in current node.
-                var cite = node.SelectSingleNode(_citePath);
-
-                // If there is no cite in current node, continue.
-                if (cite == null) continue;
-
-                // Get cite url's parameter.
-                var citeLink = cite.Attributes[_citeLinkAttrName].Value;
-                var citeSign = cite.Attributes[_citeSignAttrName].Value;
-
-                // Get profile, it includes authors, year, publish.
-                var authors = node.SelectNodes(_authorsPath);
-                var authorList = new StringBuilder();
-                if (authors != null)
-                {
-                    foreach (var author in authors)
-                    {
-                        authorList.Append(author.InnerText);
-                        authorList.Append(_separator);
-                    }
-                    authorList.Remove(authorList.Length - _separator.Length, _separator.Length);
-                }
-                else authorList.Append(_none);
-                var publish = node.SelectSingleNode(_publishPath)?.InnerText ?? _none;
-                var year = node.SelectSingleNode(_yearPath)?.InnerText ?? _none;
+                var citeUrl = ParseCiteUrl(node);
+                if (citeUrl == null)
+                    continue;
 
                 // Build entry
-                var briefEntry      = new BaiduBriefEntry();
-                briefEntry.CiteUrl  = $"{_baiduCiteURL}{WebUtility.UrlEncode(citeLink)}&sign={citeSign}&t=bib";
-                briefEntry.Profile  = $"{authorList.ToString()} - {publish} - {year}";
-                briefEntry.Title    = node.SelectSingleNode(_titlePath)?.InnerText;
-                briefEntry.Abstract = node.SelectSingleNode(_abstractPath)?.InnerText;
-                _briefEntryList.Add(briefEntry);
+                var entry = new BaiduBriefEntry();
+                entry.CiteUrl = citeUrl;
+                yield return new Tuple<HtmlNode, BriefEntry>(node, entry);
             }
+        }
+
+        protected override string ParseProfile(HtmlNode item)
+        {
+            // Get profile, it includes authors, year, publish.
+            var authors = item.SelectNodes(_authorsPath);
+            var authorList = new StringBuilder();
+            if (authors != null)
+            {
+                foreach (var author in authors)
+                {
+                    authorList.Append(author.InnerText);
+                    authorList.Append(_separator);
+                }
+                authorList.Remove(authorList.Length - _separator.Length, _separator.Length);
+            }
+            else authorList.Append(_none);
+            var publish = item.SelectSingleNode(_publishPath)?.InnerText ?? _none;
+            var year = item.SelectSingleNode(_yearPath)?.InnerText ?? _none;
+
+            return $"{authorList.ToString()} - {publish} - {year}";
+        }
+
+        protected override string ParseAbstract(HtmlNode item)
+        {
+            return item.SelectSingleNode(_abstractPath)?.InnerText;
+        }
+
+        protected override string ParseTitle(HtmlNode item)
+        {
+            return item.SelectSingleNode(_titlePath)?.InnerText;
         }
         #endregion
     }
