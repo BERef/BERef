@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BibCrawler;
+using HtmlAgilityPack;
 
 namespace BibCrawlerUnitTest
 {
@@ -9,17 +11,8 @@ namespace BibCrawlerUnitTest
         [TestMethod]
         public void TestGetResult()
         {
-            BibCrawler.BaiduSearchProvider baiduCrawler = new BibCrawler.BaiduSearchProvider("Search");
-            baiduCrawler.GetResult();
-        }
-
-        [TestMethod]
-        public void TestGetBibTex()
-        {
-            //BibCrawler.BaiduCrawler baiduCrawler = new BibCrawler.BaiduCrawler();
-            //baiduCrawler.Search("搜索");
-            //var list = baiduCrawler.GetResult();
-            //var bibTex = baiduCrawler.GetBibTex(list[0]);
+            var baiduSearchProvider = new BaiduSearchProvider();
+            var result = baiduSearchProvider.GetResult("hadoop");
         }
     }
 }

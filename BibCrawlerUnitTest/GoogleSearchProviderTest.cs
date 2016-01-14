@@ -10,16 +10,8 @@ namespace BibCrawlerUnitTest
         [TestMethod]
         public void TestGetResult()
         {
-            GoogleSearchProvider googleCrawler = new GoogleSearchProvider("Hadoop");
-            var result = googleCrawler.GetResult();
-        }
-
-        [TestMethod]
-        public void TestGetBibTex()
-        {
-            GoogleSearchProvider googleCrawler = new GoogleSearchProvider("Hadoop");
-            var result = googleCrawler.GetResult();
-            var bibTex = googleCrawler.GetBibTex(result[0]);
+            var googleSearchProvider = new GoogleSearchProvider();
+            var result = googleSearchProvider.GetResult("hadoop");
         }
     }
 }
