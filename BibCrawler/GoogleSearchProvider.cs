@@ -40,7 +40,7 @@ namespace BibCrawler
         #region Private Method
         private void GetSearchPage(string keyword)
         {
-            _htmlDoc =  _htmlWeb.Load($"{_googleScholarSearchURL}{keyword}");
+            _htmlDoc = _htmlWeb.Load($"{_googleScholarSearchURL}{keyword}");
         }
 
         private string ParseCiteUrl(HtmlNode node)
@@ -109,6 +109,15 @@ namespace BibCrawler
         protected override string ParseAbstract(HtmlNode item)
         {
             return item.SelectSingleNode(_abstractPath)?.InnerText;
+        }
+
+        protected override string Source(HtmlNode item)
+        {
+            var link = item.SelectSingleNode(_titlePath)?.SelectSingleNode(".//a");
+            if (link == null)
+                return string.Empty;
+            var linkUrl = link.GetAttributeValue("href", string.Empty);
+            return linkUrl == string.Empty ? string.Empty : WebUtility.HtmlDecode(linkUrl);
         }
         #endregion
     }

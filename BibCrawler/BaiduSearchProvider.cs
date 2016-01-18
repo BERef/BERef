@@ -12,7 +12,7 @@ namespace BibCrawler
     public sealed class BaiduSearchProvider : RefSearchProvider<HtmlNode>
     {
         #region Const Field
-        private static readonly string _baiduScholarURL = "http://xueshu.baidu.com/s?wd=";
+        private static readonly string _baiduScholarURL = "http://xueshu.baidu.com";
         private static readonly string _baiduCiteURL = "http://xueshu.baidu.com/u/citation?url=";
 
         private static readonly string _entryPath = "//div[@tpl='se_st_sc_default']";
@@ -41,7 +41,7 @@ namespace BibCrawler
         #region Private Method
         private void GetSearchPage(string keyword)
         {
-            _htmlDoc = _htmlWeb.Load($"{_baiduScholarURL}{keyword}");
+            _htmlDoc = _htmlWeb.Load($"{_baiduScholarURL}/s?wd={keyword}");
         }
 
         private string ParseCiteUrl(HtmlNode item)
@@ -120,6 +120,15 @@ namespace BibCrawler
         protected override string ParseTitle(HtmlNode item)
         {
             return item.SelectSingleNode(_titlePath)?.InnerText;
+        }
+
+        protected override string Source(HtmlNode item)
+        {
+            var partUrl = item.SelectSingleNode(_titlePath).GetAttributeValue("href", string.Empty);
+            if (partUrl == "")
+                return partUrl;
+            else
+                return $"{_baiduScholarURL}{item.SelectSingleNode(_titlePath).GetAttributeValue("href", "")}";
         }
         #endregion
     }
