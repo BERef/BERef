@@ -10,6 +10,7 @@ namespace BibCrawler
     {
         #region Private Field
         private string _title;
+        private string _source;
         private string _abstract;
         private string _profile;
         private string _bibTeX;
@@ -27,6 +28,14 @@ namespace BibCrawler
                 {
                     throw new NullReferenceException("Title is required.");
                 }
+            }
+        }
+        public string Source
+        {
+            get { return _source; }
+            set
+            {
+                _source = value ?? string.Empty;
             }
         }
         public string Abstract
