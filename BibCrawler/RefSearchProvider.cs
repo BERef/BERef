@@ -31,11 +31,12 @@ namespace BibCrawler
 
             foreach (var pair in ParsePairs())
             {
-                var item  = pair.Item1;
+                var item = pair.Item1;
                 var entry = pair.Item2;
 
-                entry.Profile  = ParseProfile(item);
-                entry.Title    = ParseTitle(item);
+                entry.Profile = ParseProfile(item);
+                entry.Title = ParseTitle(item);
+                entry.Source = Source(item);
                 entry.Abstract = ParseAbstract(item);
 
                 briefEntryList.Add(entry);
@@ -81,6 +82,19 @@ namespace BibCrawler
         /// <param name="item"></param>
         /// <returns></returns>
         protected abstract string ParseAbstract(Item item);
+
+        #endregion
+
+        #region Protected Virtual Method
+        /// <summary>
+        /// Get to BrifEntry's source.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected virtual string Source(Item item)
+        {
+            return string.Empty;
+        }
         #endregion
     }
 }
