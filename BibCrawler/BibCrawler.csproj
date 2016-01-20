@@ -49,6 +49,7 @@
     <Compile Include="BriefEntry.cs" />
     <Compile Include="GoogleBriefEntry.cs" />
     <Compile Include="GoogleSearchProvider.cs" />
+    <Compile Include="IParser.cs" />
     <Compile Include="RefSearchProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
