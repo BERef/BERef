@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ScholarProviderInterface
 {
-    public class Class1
+    public interface IBuilder<T>
     {
+        BriefEntry Build(T item);
+
     }
 }
