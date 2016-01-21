@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BriefEntry.cs" />
-    <Compile Include="Builder.cs" />
+    <Compile Include="IBuilder.cs" />
     <Compile Include="ILoader.cs" />
     <Compile Include="IParser.cs" />
     <Compile Include="ISpliter.cs" />
