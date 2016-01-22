@@ -55,7 +55,8 @@ namespace GoogleScholarProvider
         {
             var citeWeb = new HtmlWeb();
             // Get Bibtex url from cite url list.
-            var citeUrl = $"{RuleSet.GoogleScholarURL}{WebUtility.HtmlDecode(citeWeb.Load(_citeUrl).DocumentNode.SelectSingleNode(RuleSet.CiteUrlPath)?.Attributes["href"].Value)}";
+            var parameter = citeWeb.Load(_citeUrl).DocumentNode.SelectSingleNode(RuleSet.CiteUrlPath)?.Attributes["href"].Value;
+            var citeUrl = $"{RuleSet.GoogleScholarURL}{WebUtility.HtmlDecode(parameter)}";
 
             var webRequest = WebRequest.Create(citeUrl);
             var webResponse = webRequest.GetResponse();
