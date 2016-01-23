@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GoogleScholarProvider
 {
-    public sealed class GoogleBriefEntry : BriefEntry
+    public sealed class GoogleBriefEntry : ScholarProviderInterface.BriefEntry
     {
 
         #region Private Field

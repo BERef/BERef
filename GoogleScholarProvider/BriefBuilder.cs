@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using ScholarProviderInterface;
 using HtmlAgilityPack;
 
 namespace GoogleScholarProvider
 {
-    public class GoogleBriefBuilder : IBuilder<HtmlNode>
+    public class BriefBuilder : IBuilder<HtmlNode>
     {
         #region Private Static Field
         Dictionary<string, IParser<HtmlNode>> _parsers =
-            new Dictionary<string, IParser<HtmlNode>>();
-        #endregion
-
-        #region Constructor
-        public GoogleBriefBuilder()
-        { }
+            new Dictionary<string, IParser<HtmlNode>>
+            {
+                {"title"   , new TitleParser() },
+                {"source"  , new SourceParser() },
+                {"abstract", new AbstractParser() },
+                {"profile" , new ProfileParser() },
+                {"citeUrl" , new CiteUrlParser() }
+            };
         #endregion
 
         #region Private Method
@@ -37,8 +36,8 @@ namespace GoogleScholarProvider
         #region Implement 'IBuilder'
         public BriefEntry Build(HtmlNode item)
         {
-            var title = GetParser("title").Parse(item);
-            var source = GetParser("source").Parse(item);
+            var title   = GetParser("title").Parse(item);
+            var source  = GetParser("source").Parse(item);
             var abstrct = GetParser("abstract").Parse(item);
             var profile = GetParser("profile").Parse(item);
             var citeUrl = GetParser("citeUrl").Parse(item);
