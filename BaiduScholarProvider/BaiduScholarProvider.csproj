@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BaiduBriefEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuleSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
