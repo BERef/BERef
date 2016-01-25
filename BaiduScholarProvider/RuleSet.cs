@@ -9,19 +9,19 @@ namespace BaiduScholarProvider
     public static class RuleSet
     {
         #region Public Static Field
-        public static string _baiduScholarURL = "http://xueshu.baidu.com";
-        public static string _baiduCiteURL = "http://xueshu.baidu.com/u/citation?url=";
+        public static string BaiduScholarUrl = "http://xueshu.baidu.com";
+        public static string BaiduCiteUrl = "http://xueshu.baidu.com/u/citation?url=";
 
-        public static string _entryPath = "//div[@tpl='se_st_sc_default']";
-        public static string _citePath = ".//a[@data-click=\"{\'button_tp\':\'cite\'}\"]";
-        public static string _titlePath = ".//a[@data-click=\"{\'button_tp\':\'title\'}\"]";
-        public static string _authorsPath = ".//a[@data-click=\"{\'button_tp\':\'author\'}\"]";
-        public static string _publishPath = ".//a[@data-click=\"{\'button_tp\':\'publish\'}\"]";
-        public static string _yearPath = ".//span[@data-year]";
-        public static string _abstractPath = ".//div[@class='c_abstract']";
+        public static string EntryPath = "//div[@tpl='se_st_sc_default']";
+        public static string CitePath = ".//a[@data-click=\"{\'button_tp\':\'cite\'}\"]";
+        public static string TitlePath = ".//a[@data-click=\"{\'button_tp\':\'title\'}\"]";
+        public static string AuthorsPath = ".//a[@data-click=\"{\'button_tp\':\'author\'}\"]";
+        public static string PublishPath = ".//a[@data-click=\"{\'button_tp\':\'publish\'}\"]";
+        public static string YearPath = ".//span[@data-year]";
+        public static string AbstractPath = ".//div[@class='c_abstract']";
 
-        public static string _citeLinkAttrName = "data-link";
-        public static string _citeSignAttrName = "data-sign";
+        public static string CiteLinkAttrName = "data-link";
+        public static string CiteSignAttrName = "data-sign";
 
         #endregion
     }
