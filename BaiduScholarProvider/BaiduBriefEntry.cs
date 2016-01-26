@@ -54,9 +54,13 @@ namespace BaiduScholarProvider
             var webResponse = webRequest.GetResponse();
 
             string bibtex = null;
-            using (var reader = new StreamReader(webResponse.GetResponseStream()))
+            var stream = webResponse.GetResponseStream();
+            if ( stream != null)
             {
-                bibtex = reader.ReadToEnd();
+                using (var reader = new StreamReader(stream))
+                {
+                    bibtex = reader.ReadToEnd();
+                }
             }
             return bibtex;
         }
