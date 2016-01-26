@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using ScholarProviderInterface;
+
 namespace BaiduScholarProvider
 {
     public class TitleParser : IParser<HtmlNode>
     {
         #region Implement 'IParser'
         public string Parse(HtmlNode item)
-        {
-            return item.SelectSingleNode(RuleSet.TitlePath)?.InnerText;
-        }
+             => item.SelectSingleNode(RuleSet.TitlePath)?.InnerText;
         #endregion
     }
+}
