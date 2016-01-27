@@ -48,6 +48,7 @@
     <Compile Include="IBuilder.cs" />
     <Compile Include="ILoader.cs" />
     <Compile Include="IParser.cs" />
+    <Compile Include="IScholarProviderFactory.cs" />
     <Compile Include="ISpliter.cs" />
     <Compile Include="ISearchProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
