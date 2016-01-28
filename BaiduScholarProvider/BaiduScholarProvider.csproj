@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AbstractParser.cs" />
     <Compile Include="BaiduBriefEntry.cs" />
+    <Compile Include="BriefBuilder.cs" />
     <Compile Include="CiteUrlParser.cs" />
     <Compile Include="ProfileParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
