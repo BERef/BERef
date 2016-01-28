@@ -73,7 +73,7 @@ namespace ScholarProviderInterface
         {
             get
             {
-                _bibTeX = _bibTeX ?? GetBibTeX();
+                _bibTeX = _bibTeX ?? GetBibTeXAsync().Result;
                 return _bibTeX;
             }
 
@@ -86,7 +86,7 @@ namespace ScholarProviderInterface
         /// Get BibTeX from customed data source.
         /// </summary>
         /// <returns></returns>
-        protected abstract string GetBibTeX();
+        protected abstract Task<string> GetBibTeXAsync();
         #endregion
     }
 }
