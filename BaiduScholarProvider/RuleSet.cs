@@ -23,6 +23,8 @@ namespace BaiduScholarProvider
         public static string CiteLinkAttrName = "data-link";
         public static string CiteSignAttrName = "data-sign";
 
+        public static string Separator = ", ";
+        public static string None = "None";
         #endregion
     }
 }
