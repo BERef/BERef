@@ -44,13 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaiduBriefEntry.cs" />
-    <Compile Include="BaiduSearchProvider.cs" />
-    <Compile Include="BriefEntry.cs" />
-    <Compile Include="GoogleBriefEntry.cs" />
-    <Compile Include="GoogleSearchProvider.cs" />
-    <Compile Include="IParser.cs" />
-    <Compile Include="RefSearchProvider.cs" />
+    <None Include="BaiduBriefEntry.cs" />
+    <None Include="BaiduSearchProvider.cs" />
+    <None Include="BriefEntry.cs" />
+    <None Include="GoogleBriefEntry.cs" />
+    <None Include="GoogleSearchProvider.cs" />
+    <None Include="IParser.cs" />
+    <None Include="RefSearchProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
