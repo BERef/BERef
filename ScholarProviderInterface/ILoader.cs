@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ScholarProviderInterface
 {
-    public interface ILoader<DataSource>
+    public interface ILoader<TDataSource>
     {
-        DataSource Load(string keyword);
+        TDataSource Load(string keyword);
     }
 }

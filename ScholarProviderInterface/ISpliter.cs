@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ScholarProviderInterface
 {
-    public interface ISpliter<DataSource, T>
+    public interface ISpliter<TDataSource, T>
     {
-        IEnumerable<T> Split(DataSource dataSource);
+        IEnumerable<T> Split(TDataSource dataSource);
     }
 }
