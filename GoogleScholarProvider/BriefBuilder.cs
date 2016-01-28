@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 using ScholarProviderInterface;
 using HtmlAgilityPack;
+using System.Diagnostics;
 
 namespace GoogleScholarProvider
 {
     public class BriefBuilder : IBuilder<HtmlNode>
     {
-        #region Private Static Field
-        Dictionary<string, IParser<HtmlNode>> _parsers =
+        #region Private Field
+        private Dictionary<string, IParser<HtmlNode>> _parsers =
             new Dictionary<string, IParser<HtmlNode>>
             {
                 {"title"   , new TitleParser() },
@@ -23,17 +24,17 @@ namespace GoogleScholarProvider
         #region Private Method
         private IParser<HtmlNode> GetParser(string type)
         {
-            if (_parsers.ContainsKey(type))
-                return _parsers[type];
-            else
-            {
-                //TODO: throw an exception
-                throw new Exception();
-            }
+            Debug.Assert(_parsers.ContainsKey(type));
+            return _parsers[type];
         }
         #endregion
 
         #region Implement 'IBuilder'
+        /// <summary>
+        /// Using parsers parse HtmlNode and build GoogleBriefEntry.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public BriefEntry Build(HtmlNode item)
         {
             var title   = GetParser("title").Parse(item);
