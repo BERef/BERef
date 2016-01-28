@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GoogleScholarProvider
 {
-    public sealed class GoogleBriefEntry : ScholarProviderInterface.BriefEntry
+    public sealed class GoogleBriefEntry : BriefEntry
     {
 
         #region Private Field
@@ -48,10 +48,9 @@ namespace GoogleScholarProvider
         #region Implement Abstract Method
         /// <summary>
         /// Get BibTeX from Google Scholar.
-        /// TODO: need async
         /// </summary>
         /// <returns></returns>
-        protected override string GetBibTeX()
+        protected async override Task<string> GetBibTeXAsync()
         {
             var citeWeb = new HtmlWeb();
             // Get Bibtex url from cite url list.
@@ -59,7 +58,7 @@ namespace GoogleScholarProvider
             var citeUrl = $"{RuleSet.GoogleScholarURL}{WebUtility.HtmlDecode(parameter)}";
 
             var webRequest = WebRequest.Create(citeUrl);
-            var webResponse = webRequest.GetResponse();
+            var webResponse = await webRequest.GetResponseAsync();
 
             string bibtex = null;
             using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding.Default))
