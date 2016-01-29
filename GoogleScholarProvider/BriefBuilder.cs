@@ -37,11 +37,14 @@ namespace GoogleScholarProvider
         /// <returns></returns>
         public BriefEntry Build(HtmlNode item)
         {
+            var citeUrl = GetParser("citeUrl").Parse(item);
+            // CiteUrl is required
+            if (citeUrl == null)
+                return null;
             var title   = GetParser("title").Parse(item);
             var source  = GetParser("source").Parse(item);
             var abstrct = GetParser("abstract").Parse(item);
             var profile = GetParser("profile").Parse(item);
-            var citeUrl = GetParser("citeUrl").Parse(item);
             return new GoogleBriefEntry(title, source, abstrct, profile, citeUrl);
         }
         #endregion
