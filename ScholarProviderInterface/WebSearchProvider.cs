@@ -34,7 +34,8 @@ namespace ScholarProviderInterface
             foreach(var item in _spliter.Split(data))
             {
                 var briefEntry = _builder.Build(item);
-                result.Add(briefEntry);
+                if(briefEntry != null)
+                    result.Add(briefEntry);
             }
             return result;
         }
