@@ -38,11 +38,13 @@ namespace BaiduScholarProvider
         #region Implement 'IBuilder'
         public BriefEntry Build(HtmlNode item)
         {
+            var citeUrl = GetParser("citeUrl").Parse(item);
+            if (citeUrl == null)
+                return null;
             var title = GetParser("title").Parse(item);
             var source = GetParser("source").Parse(item);
             var abstrct = GetParser("abstract").Parse(item);
             var profile = GetParser("profile").Parse(item);
-            var citeUrl = GetParser("citeUrl").Parse(item);
             return new BaiduBriefEntry(title, source, abstrct, profile, citeUrl);
         }
         #endregion
