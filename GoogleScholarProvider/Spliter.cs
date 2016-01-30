@@ -15,13 +15,9 @@ namespace GoogleScholarProvider
         #region Implement 'ISpliter'
         public IEnumerable<HtmlNode> Split(HtmlDocument dataSource)
         {
-            var nodes = dataSource.DocumentNode.SelectNodes(RuleSet.EntryPath);
-
-            foreach (var node in nodes)
-            {
-                yield return node;
-            }
+            return dataSource.DocumentNode.SelectNodes(RuleSet.EntryPath);
         }
+
         #endregion
     }
 }
