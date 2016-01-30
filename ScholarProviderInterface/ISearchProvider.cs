@@ -8,8 +8,6 @@ namespace ScholarProviderInterface
 {
     public interface ISearchProvider
     {
-        #region Public Abstract Method
         IList<BriefEntry> GetResults(string keyword);
-        #endregion
     }
 }

@@ -17,7 +17,8 @@ namespace ScholarProviderInterface
         #endregion
 
         #region Constructor
-        public BriefEntry(string title, string source, string abstrct, string profile)
+
+        protected BriefEntry(string title, string source, string abstrct, string profile)
         {
             Title = title;
             Source = source;

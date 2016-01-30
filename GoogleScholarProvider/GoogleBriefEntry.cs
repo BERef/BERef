@@ -58,7 +58,7 @@ namespace GoogleScholarProvider
             var parameter = citeWeb.Load(_citeUrl).DocumentNode.SelectSingleNode(RuleSet.CiteUrlPath)?.Attributes["href"].Value;
             if (parameter != null)
             {
-                var citeUrl = $"{RuleSet.GoogleScholarURL}{WebUtility.HtmlDecode(parameter)}";
+                var citeUrl = $"{RuleSet.GoogleScholarUrl}{WebUtility.HtmlDecode(parameter)}";
 
                 var webRequest = WebRequest.Create(citeUrl);
                 var webResponse = webRequest.GetResponse();

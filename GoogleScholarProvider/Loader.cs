@@ -15,7 +15,7 @@ namespace GoogleScholarProvider
         public HtmlDocument Load(string keyword)
         {
             var htmlWeb = new HtmlWeb();
-            return htmlWeb.Load($"{RuleSet.GoogleScholarSearchURL}{keyword}");
+            return htmlWeb.Load($"{RuleSet.GoogleScholarSearchUrl}{keyword}");
         }
         #endregion
     }
