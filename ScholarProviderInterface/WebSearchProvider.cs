@@ -10,9 +10,9 @@ namespace ScholarProviderInterface
     public class WebSearchProvider : ISearchProvider
     {
         #region Private Field
-        private ILoader<HtmlDocument>            _loader;
-        private ISpliter<HtmlDocument, HtmlNode> _spliter;
-        private IBuilder<HtmlNode>               _builder;
+        private readonly ILoader<HtmlDocument>            _loader;
+        private readonly ISpliter<HtmlDocument, HtmlNode> _spliter;
+        private readonly IBuilder<HtmlNode>               _builder;
         #endregion
 
         #region Constructor
