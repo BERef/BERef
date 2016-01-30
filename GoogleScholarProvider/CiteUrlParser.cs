@@ -23,7 +23,7 @@ namespace GoogleScholarProvider
 
             // Get cite url's parameter.
             var citeId = cite.Attributes[RuleSet.CiteIdAttrName].Value.Split(',')[1];
-            return $"{RuleSet.GoogleCiteURL}{citeId.Substring(1, citeId.Length - 2)}{RuleSet.GoogleCiteURLSuffix}";
+            return $"{RuleSet.GoogleCiteUrl}{citeId.Substring(1, citeId.Length - 2)}{RuleSet.GoogleCiteUrlSuffix}";
         }
         #endregion
     }
