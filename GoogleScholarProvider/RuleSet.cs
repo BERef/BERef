@@ -9,10 +9,10 @@ namespace GoogleScholarProvider
     public static class RuleSet
     {
         #region Public Static Field
-        public static string GoogleScholarURL       = "https://scholar.google.com";
-        public static string GoogleScholarSearchURL = "https://scholar.google.com/scholar?q=";
-        public static string GoogleCiteURL          = "https://scholar.google.com/scholar.bib?q=info:";
-        public static string GoogleCiteURLSuffix    = ":scholar.google.com/&output=cite&scirp=0&hl=zh-CN";
+        public static string GoogleScholarUrl       = "https://scholar.google.com";
+        public static string GoogleScholarSearchUrl = "https://scholar.google.com/scholar?q=";
+        public static string GoogleCiteUrl          = "https://scholar.google.com/scholar.bib?q=info:";
+        public static string GoogleCiteUrlSuffix    = ":scholar.google.com/&output=cite&scirp=0&hl=zh-CN";
 
         public static string EntryPath              = "//div[@class='gs_ri']";
         public static string CiteUrlPath            = "//a[@class='gs_citi']";
