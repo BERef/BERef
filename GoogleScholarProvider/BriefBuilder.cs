@@ -10,7 +10,7 @@ namespace GoogleScholarProvider
     public class BriefBuilder : IBuilder<HtmlNode>
     {
         #region Private Field
-        private Dictionary<string, IParser<HtmlNode>> _parsers =
+        private readonly Dictionary<string, IParser<HtmlNode>> _parsers =
             new Dictionary<string, IParser<HtmlNode>>
             {
                 {"title"   , new TitleParser() },
