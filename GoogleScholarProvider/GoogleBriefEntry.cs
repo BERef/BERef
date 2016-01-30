@@ -50,20 +50,28 @@ namespace GoogleScholarProvider
         /// Get BibTeX from Google Scholar.
         /// </summary>
         /// <returns></returns>
-        protected async override Task<string> GetBibTeXAsync()
+        protected override string GetBibTeX()
         {
+            string bibtex = null;
             var citeWeb = new HtmlWeb();
             // Get Bibtex url from cite url list.
             var parameter = citeWeb.Load(_citeUrl).DocumentNode.SelectSingleNode(RuleSet.CiteUrlPath)?.Attributes["href"].Value;
-            var citeUrl = $"{RuleSet.GoogleScholarURL}{WebUtility.HtmlDecode(parameter)}";
-
-            var webRequest = WebRequest.Create(citeUrl);
-            var webResponse = await webRequest.GetResponseAsync();
-
-            string bibtex = null;
-            using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding.Default))
+            if (parameter != null)
             {
-                bibtex = reader.ReadToEnd();
+                var citeUrl = $"{RuleSet.GoogleScholarURL}{WebUtility.HtmlDecode(parameter)}";
+
+                var webRequest = WebRequest.Create(citeUrl);
+                var webResponse = webRequest.GetResponse();
+
+                
+                var response = webResponse.GetResponseStream();
+                if (response != null)
+                {
+                    using (var reader = new StreamReader(response, Encoding.Default))
+                    {
+                        bibtex = reader.ReadToEnd();
+                    }
+                }
             }
             return bibtex;
         }

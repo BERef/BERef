@@ -48,14 +48,14 @@ namespace BaiduScholarProvider
         /// Get BibTeX from Baidu Scholar.
         /// </summary>
         /// <returns></returns>
-        protected override string GetBibTeXAsync()
+        protected override string GetBibTeX()
         {
             var webRequest = WebRequest.Create(_citeUrl);
             var webResponse = webRequest.GetResponse();
 
             string bibtex = null;
             var stream = webResponse.GetResponseStream();
-            if ( stream != null)
+            if (stream != null)
             {
                 using (var reader = new StreamReader(stream))
                 {
