@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,13 +26,8 @@ namespace BaiduScholarProvider
         #region Private Method
         private IParser<HtmlNode> GetParser(string type)
         {
-            if (_parsers.ContainsKey(type))
-                return _parsers[type];
-            else
-            {
-                //TODO: throw an exception
-                throw new Exception();
-            }
+            Debug.Assert(_parsers.ContainsKey(type));
+            return _parsers[type];
         }
         #endregion
 
