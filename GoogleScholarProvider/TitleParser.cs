@@ -21,7 +21,7 @@ namespace GoogleScholarProvider
                 if (t.Name != "span")
                     titleBuilder.Append(t.InnerText);
             }
-            return titleBuilder.ToString();
+            return titleBuilder.ToString().Trim();
         }
         #endregion
     }
