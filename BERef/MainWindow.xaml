@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BERef"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="512" Width="1024">
+    <StackPanel>
+        <Menu x:Uid="Menu_Main">
+            <MenuItem x:Uid="MenuItem_Main_File" Header="_File">
+                <MenuItem x:Uid="MenuItem_Main_File_New" Header="_New Library"></MenuItem>
+                <MenuItem x:Uid="MenuItem_Main_File_Open" Header="_Open Library"></MenuItem>
+                <Separator></Separator>
+                <MenuItem x:Uid="MenuItem_Main_File_Save" Header="_Save" InputGestureText="Ctrl+S"></MenuItem>
+                <MenuItem x:Uid="MenuItem_Main_File_Close" Header="_Close"></MenuItem>
+                <Separator></Separator>
+                <MenuItem x:Uid="MenuItem_Main_File_Exit" Header="_Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem x:Uid="MenuItem_Main_Edit" Header="_Edit">
+                <MenuItem x:Uid="MenuItem_Main_Edit_New" Header="_New Entry...">
+                    <MenuItem x:Uid="MenuItem_Main_Edit_New_Wizard" Header="_Wizard"></MenuItem>
+                    <MenuItem x:Uid="MenuItem_Main_Edit_New_BibTeX" Header="_From BibTeX"></MenuItem>
+                </MenuItem>
+                <MenuItem x:Uid="MenuItem_Main_Edit_Delete" Header="_Delete"></MenuItem>
+            </MenuItem>
+        </Menu>
+    </StackPanel>
 </Window>
