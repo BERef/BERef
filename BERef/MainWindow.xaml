@@ -6,24 +6,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BERef"
         mc:Ignorable="d"
-        Title="MainWindow" Height="512" Width="1024">
+        Title="BERef" Height="512" Width="1024">
     <StackPanel>
         <Menu x:Uid="Menu_Main">
-            <MenuItem x:Uid="MenuItem_Main_File" Header="_File">
-                <MenuItem x:Uid="MenuItem_Main_File_New" Header="_New Library"></MenuItem>
-                <MenuItem x:Uid="MenuItem_Main_File_Open" Header="_Open Library"></MenuItem>
+            <MenuItem x:Uid="MenuItem_Main_File" Header="File(_F)">
+                <MenuItem x:Uid="MenuItem_Main_File_New" Header="New Library(_N)"></MenuItem>
+                <MenuItem x:Uid="MenuItem_Main_File_Open" Header="Open Library(_O)"></MenuItem>
                 <Separator></Separator>
-                <MenuItem x:Uid="MenuItem_Main_File_Save" Header="_Save" InputGestureText="Ctrl+S"></MenuItem>
-                <MenuItem x:Uid="MenuItem_Main_File_Close" Header="_Close"></MenuItem>
+                <MenuItem x:Uid="MenuItem_Main_File_Save" Header="Save(_S)" InputGestureText="Ctrl+S"></MenuItem>
+                <MenuItem x:Uid="MenuItem_Main_File_Close" Header="Close(_C)"></MenuItem>
                 <Separator></Separator>
-                <MenuItem x:Uid="MenuItem_Main_File_Exit" Header="_Exit"></MenuItem>
+                <MenuItem x:Uid="MenuItem_Main_File_Exit" Header="Exit(_E)"></MenuItem>
             </MenuItem>
-            <MenuItem x:Uid="MenuItem_Main_Edit" Header="_Edit">
-                <MenuItem x:Uid="MenuItem_Main_Edit_New" Header="_New Entry...">
-                    <MenuItem x:Uid="MenuItem_Main_Edit_New_Wizard" Header="_Wizard"></MenuItem>
-                    <MenuItem x:Uid="MenuItem_Main_Edit_New_BibTeX" Header="_From BibTeX"></MenuItem>
+            <MenuItem x:Uid="MenuItem_Main_Edit" Header="Edit(_E)">
+                <MenuItem x:Uid="MenuItem_Main_Edit_New" Header="New Entry...(_N)">
+                    <MenuItem x:Uid="MenuItem_Main_Edit_New_Wizard" Header="Wizard(_W)"></MenuItem>
+                    <MenuItem x:Uid="MenuItem_Main_Edit_New_BibTeX" Header="BibTeX(_B)"></MenuItem>
                 </MenuItem>
-                <MenuItem x:Uid="MenuItem_Main_Edit_Delete" Header="_Delete"></MenuItem>
+                <MenuItem x:Uid="MenuItem_Main_Edit_Delete" Header="Delete(_D)" InputGestureText="Ctrl+D"></MenuItem>
             </MenuItem>
         </Menu>
     </StackPanel>
