@@ -25,6 +25,12 @@
                 </MenuItem>
                 <MenuItem x:Uid="MenuItem_Main_Edit_Delete" Header="Delete(_D)" InputGestureText="Ctrl+D"></MenuItem>
             </MenuItem>
+            <MenuItem x:Uid="MenuItem_Main_Tools" Header="Tools(_T)">
+                <MenuItem x:Uid="MenuItem_Main_Tools_Settings" Header="Settings(_S)"></MenuItem>
+            </MenuItem>
+            <MenuItem x:Uid="MenuItem_Main_Help" Header="Help(_H)">
+                <MenuItem x:Uid="MenuItem_Main_Help_About" Header="About BERef(_A)"></MenuItem>
+            </MenuItem>
         </Menu>
     </StackPanel>
 </Window>
