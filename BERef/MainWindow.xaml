@@ -19,14 +19,14 @@
                 <MenuItem x:Uid="MenuItem_Main_File_Exit" Header="Exit(_E)"></MenuItem>
             </MenuItem>
             <MenuItem x:Uid="MenuItem_Main_Edit" Header="Edit(_E)">
-                <MenuItem x:Uid="MenuItem_Main_Edit_New" Header="New Entry...(_N)">
-                    <MenuItem x:Uid="MenuItem_Main_Edit_New_Wizard" Header="Wizard(_W)"></MenuItem>
-                    <MenuItem x:Uid="MenuItem_Main_Edit_New_BibTeX" Header="BibTeX(_B)"></MenuItem>
+                <MenuItem x:Uid="MenuItem_Main_Edit_New" Header="New Entry(_N)">
+                    <MenuItem x:Uid="MenuItem_Main_Edit_New_Wizard" Header="Wizard(_W)..."></MenuItem>
+                    <MenuItem x:Uid="MenuItem_Main_Edit_New_BibTeX" Header="BibTeX(_B)..."></MenuItem>
                 </MenuItem>
                 <MenuItem x:Uid="MenuItem_Main_Edit_Delete" Header="Delete(_D)" InputGestureText="Ctrl+D"></MenuItem>
             </MenuItem>
             <MenuItem x:Uid="MenuItem_Main_Tools" Header="Tools(_T)">
-                <MenuItem x:Uid="MenuItem_Main_Tools_Settings" Header="Settings(_S)"></MenuItem>
+                <MenuItem x:Uid="MenuItem_Main_Tools_Settings" Header="Settings(_S)..."></MenuItem>
             </MenuItem>
             <MenuItem x:Uid="MenuItem_Main_Help" Header="Help(_H)">
                 <MenuItem x:Uid="MenuItem_Main_Help_About" Header="About BERef(_A)"></MenuItem>
