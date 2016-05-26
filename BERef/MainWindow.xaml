@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="BERef" Height="512" Width="1024">
     <StackPanel>
+        <!--Menu Bar-->
         <Menu x:Uid="Menu_Main">
             <MenuItem x:Uid="MenuItem_Main_File" Header="File(_F)">
                 <MenuItem x:Uid="MenuItem_Main_File_New" Header="New Library(_N)"></MenuItem>
@@ -32,5 +33,27 @@
                 <MenuItem x:Uid="MenuItem_Main_Help_About" Header="About BERef(_A)"></MenuItem>
             </MenuItem>
         </Menu>
+        <!--Tool Bar-->
+        <ToolBar>
+            <Button x:Uid="ToolBar_Save" Content="Save"></Button>
+            <Separator></Separator>
+            <Button x:Uid="ToolBar_New" Content="New"></Button>
+            <Button x:Uid="ToolBar_Edit" Content="Edit"></Button>
+            <Separator></Separator>
+        </ToolBar>
+        <!--Workbench-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--Data Grid-->
+            <DataGrid AutoGenerateColumns="False" Grid.Column="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Uid="DataGrid_Title" Header="Title"></DataGridTextColumn>
+                    <DataGridTextColumn x:Uid="DataGrid_Year" Header="Year"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </StackPanel>
 </Window>
