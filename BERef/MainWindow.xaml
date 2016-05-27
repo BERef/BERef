@@ -44,14 +44,14 @@
         <!--Workbench-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!--Data Grid-->
             <DataGrid AutoGenerateColumns="False" Grid.Column="0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Uid="DataGrid_Title" Header="Title"></DataGridTextColumn>
-                    <DataGridTextColumn x:Uid="DataGrid_Year" Header="Year"></DataGridTextColumn>
+                    <DataGridTextColumn x:Uid="DataGrid_Title" Header="Title" Width="3*"></DataGridTextColumn>
+                    <DataGridTextColumn x:Uid="DataGrid_Year" Header="Year" Width="*"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
