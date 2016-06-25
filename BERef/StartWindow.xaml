@@ -1,0 +1,25 @@
+﻿<Window x:Uid="Window_Start"
+        x:Class="BERef.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BERef"
+        mc:Ignorable="d"
+        Title="StartWindow" Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--Current Database-->
+        <StackPanel Grid.Column="0">
+            
+        </StackPanel>
+        <!--Guide-->
+        <StackPanel Grid.Column="1">
+            <Button x:Uid="Button_Create" Content="Create Database"></Button>
+            <Button x:Uid="Button_Import" Content="Import Database"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
